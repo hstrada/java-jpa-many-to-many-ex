@@ -1,6 +1,6 @@
 # java-jpa-many-to-many-ex
 
-Exercício proposto sobre JPA - Many to many
+Exercício 3 proposto sobre JPA - Many to many
 
 # db
 
