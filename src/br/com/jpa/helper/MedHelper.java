@@ -1,8 +1,14 @@
 package br.com.jpa.helper;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import br.com.jpa.entity.Agenda;
+import br.com.jpa.entity.Matmed;
 import br.com.jpa.entity.Paciente;
+import br.com.jpa.entity.Procedimento;
 
 public class MedHelper {
 
@@ -12,15 +18,50 @@ public class MedHelper {
 		this.em = em;
 	}
 
-	public void salvar(Paciente paciente) throws Exception {
+	public void salvarPaciente(Paciente paciente) throws Exception {
 		try {
 			em.getTransaction().begin();
 			em.persist(paciente);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			em.getTransaction().rollback();
 			throw e;
 		}
+	}// JPQL: Usando Query
+
+	public void adicionarAgenda(Agenda agenda) {
+		try {
+			em.getTransaction().begin();
+			em.persist(agenda);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public void adicionarProcedimento(Procedimento procedimento) {
+		try {
+			em.getTransaction().begin();
+			em.persist(procedimento);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public void adicionarMatmed(Matmed matmed) {
+		try {
+			em.getTransaction().begin();
+			em.persist(matmed);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Paciente> listarPacientes() {
+		Query query = em.createQuery("select p from Paciente p");
+		return query.getResultList();
 	}
 
 }
