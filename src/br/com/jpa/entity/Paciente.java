@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +20,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "PACIENTE", catalog = "db_med")
+@NamedQuery(name = "Paciente.findAll", query = "select p from Paciente p")
 public class Paciente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
