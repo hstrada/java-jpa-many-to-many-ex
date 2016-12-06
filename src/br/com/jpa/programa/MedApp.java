@@ -18,8 +18,8 @@ public class MedApp {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaPU");
 		EntityManager em = emf.createEntityManager();
-		// incluirPaciente(em);
-		listarPacientes(em);
+		incluirAgenda(em);
+		// listarPacientes(em);
 	}
 
 	private static void listarPacientes(EntityManager em) {
@@ -30,23 +30,23 @@ public class MedApp {
 		}
 		em.close();
 	}
-	
-	private static void incluirPaciente(EntityManager em) {
+
+	private static void incluirAgenda(EntityManager em) {
 
 		MedHelper dao = new MedHelper(em);
-
-		// adicionando novo paciente
-		Paciente paciente = new Paciente();
-		paciente.setCpf("111.111.111-77");
-		// paciente.setDatanasc(new Date());
-		paciente.setNome("Helena");
-		paciente.setTelefone("1234-56789");
 
 		// adicionando nova agenda
 		Agenda agenda = new Agenda();
 		agenda.setData(new Date());
 		agenda.setHora(new Date());
 		agenda.setDescricao("Agenda 1");
+
+		// adicionando novo paciente
+		Paciente paciente = new Paciente();
+		paciente.setCpf("111.111.111-11");
+		// paciente.setDatanasc(new Date());
+		paciente.setNome("Helena");
+		paciente.setTelefone("1234-56789");
 
 		agenda.getPacientes().add(paciente);
 		paciente.getAgendas().add(agenda);
@@ -64,11 +64,11 @@ public class MedApp {
 		matmed.setPaciente(paciente);
 		matmed.setPreco(10);
 
+		paciente.getMatmeds().add(matmed);
+		paciente.getProcedimentos().add(procedimento);
+
 		try {
-			dao.salvarPaciente(paciente);
-			dao.adicionarAgenda(agenda);
-			dao.adicionarProcedimento(procedimento);
-			dao.adicionarMatmed(matmed);
+			dao.salvarAgenda(agenda);
 			System.out.println("Incluído com sucesso");
 		} catch (Exception e) {
 			System.out.println("ERRO ===>> " + e.getMessage());

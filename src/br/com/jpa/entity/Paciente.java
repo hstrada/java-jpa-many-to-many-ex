@@ -3,13 +3,16 @@ package br.com.jpa.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,6 +39,28 @@ public class Paciente implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pacientes")
 	private Set<Agenda> agendas = new HashSet<>();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paciente")
+	private Set<Procedimento> procedimentos = new LinkedHashSet<Procedimento>();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paciente")
+	private Set<Matmed> matmeds = new LinkedHashSet<Matmed>();
+
+	public Set<Procedimento> getProcedimentos() {
+		return procedimentos;
+	}
+
+	public void setProcedimentos(Set<Procedimento> procedimentos) {
+		this.procedimentos = procedimentos;
+	}
+
+	public Set<Matmed> getMatmeds() {
+		return matmeds;
+	}
+
+	public void setMatmeds(Set<Matmed> matmeds) {
+		this.matmeds = matmeds;
+	}
 
 	public Set<Agenda> getAgendas() {
 		return agendas;

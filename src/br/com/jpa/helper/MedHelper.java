@@ -18,17 +18,7 @@ public class MedHelper {
 		this.em = em;
 	}
 
-	public void salvarPaciente(Paciente paciente) throws Exception {
-		try {
-			em.getTransaction().begin();
-			em.persist(paciente);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			throw e;
-		}
-	}// JPQL: Usando Query
-
-	public void adicionarAgenda(Agenda agenda) {
+	public void salvarAgenda(Agenda agenda) throws Exception {
 		try {
 			em.getTransaction().begin();
 			em.persist(agenda);
@@ -36,27 +26,7 @@ public class MedHelper {
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	public void adicionarProcedimento(Procedimento procedimento) {
-		try {
-			em.getTransaction().begin();
-			em.persist(procedimento);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	public void adicionarMatmed(Matmed matmed) {
-		try {
-			em.getTransaction().begin();
-			em.persist(matmed);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
+	}// JPQL: Usando Query
 
 	@SuppressWarnings("unchecked")
 	public List<Paciente> listarPacientes() {
