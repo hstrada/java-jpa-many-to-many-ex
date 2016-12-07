@@ -66,4 +66,9 @@ public class Procedimento implements Serializable {
 		this.preco = preco;
 	}
 
+	@Override
+	public String toString() {
+		return "Procedimento [id=" + id + ", descricao=" + descricao + ", preco=" + preco + "]";
+	}
+
 }

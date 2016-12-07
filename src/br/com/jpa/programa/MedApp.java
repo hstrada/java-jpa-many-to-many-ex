@@ -21,6 +21,7 @@ public class MedApp {
 		// incluirAgenda(em);
 		// listarPacientes(em);
 		// buscarPaciente(em, "111.111.111-11");
+		listaPacienteMatMed(em);
 	}
 
 	private static void listarPacientes(EntityManager em) {
@@ -32,12 +33,21 @@ public class MedApp {
 		em.close();
 	}
 
+	private static void listaPacienteMatMed(EntityManager em) {
+		MedHelper dao = new MedHelper(em);
+		List<Paciente> pacientes = dao.listaPacienteMatMed();
+		for (Paciente paciente : pacientes) {
+			System.out.println(paciente.getCpf() + ": " + paciente.getNome() + paciente.getProcedimentos());
+		}
+		em.close();
+	}
+
 	private static void buscarPaciente(EntityManager em, String cpf) {
 		MedHelper dao = new MedHelper(em);
 		Paciente p = dao.buscarPaciente(cpf);
 		System.out.println(p.getCpf() + ": " + p.getNome());
 	}
-	
+
 	private static void incluirAgenda(EntityManager em) {
 
 		MedHelper dao = new MedHelper(em);
@@ -83,9 +93,4 @@ public class MedApp {
 
 	}
 
-	private static void atualizarPaciente(EntityManager em, String cpf) {
-		MedHelper dao = new MedHelper(em);
-		Paciente p = dao.buscarPaciente(cpf);
-	}
-	
 }
